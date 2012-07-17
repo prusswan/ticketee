@@ -8,12 +8,12 @@ When /^I create a project called "([^"]*)"$/ do |name|
   click_button 'Create Project'
 end
 
-Then /^I should be informed that the project has(|\snot) been ([^\"]*)$/ do |flag, action|
-  page.should have_content("Project has#{flag} been #{action}.")
+Then /^I should be informed that the ([^"]*) has(|\snot) been ([^\"]*)$/ do |model, negate, action|
+  page.should have_content("#{model.capitalize} has#{negate} been #{action}.")
 end
 
-Then /^I should(|\snot) be on the project page for "([^"]*)"$/ do |flag, name|
-  if flag.length == 0
+Then /^I should( not)? be on the project page for "([^"]*)"$/ do |negate, name|
+  unless negate
     current_path.should == project_path(Project.find_by_name!(name))
     page.should have_content("#{name} - Projects - Ticketee")
   else
@@ -22,13 +22,10 @@ Then /^I should(|\snot) be on the project page for "([^"]*)"$/ do |flag, name|
   end
 end
 
-When /^I try to create a project without a name$/ do
-  click_link 'New Project'
-  click_button 'Create Project'
-end
-
-Then /^I should be told that the name is required$/ do
-  page.should have_content("Name can't be blank")
+Then /^I should be told that(?: both| the|) ([^"]*) (?:is|are) required$/ do |attributes|
+  attributes.gsub(/ (and|the)(?= )/, " ").split.each do |attribute|
+    page.should have_content("#{attribute.capitalize} can't be blank")
+  end
 end
 
 Given /^there is a project called "([^\"]*)"$/ do |name|

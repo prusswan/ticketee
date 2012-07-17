@@ -18,7 +18,7 @@ Feature: Creating projects
 
   Scenario: Creating a project without a name
     # And I press "Create Project"
-    When I try to create a project without a name
+    When I create a project called ""
     # Then I should see "Project has not been created."
     Then I should be informed that the project has not been created
     # And I should see "Name can't be blank"
