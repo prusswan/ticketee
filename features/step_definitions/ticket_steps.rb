@@ -37,3 +37,10 @@ end
 When /^I navigate to the homepage$/ do
   click_link 'Ticketee'
 end
+
+When /^I rename the "([^"]*)" ticket to "([^"]*)"$/ do |name, new_name|
+  click_link name
+  click_link 'Edit Ticket'
+  fill_in :Name, with: new_name
+  click_button 'Update Ticket'
+end
