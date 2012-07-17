@@ -8,8 +8,8 @@ When /^I create a project called "([^"]*)"$/ do |name|
   click_button 'Create Project'
 end
 
-Then /^I should be shown the message for project creation$/ do
-  page.should have_content("Project has been created.")
+Then /^I should be informed that the project has(|\snot) been ([^\"]*)$/ do |flag, action|
+  page.should have_content("Project has#{flag} been #{action}.")
 end
 
 Then /^I should be on the project page for "([^"]*)"$/ do |name|
@@ -22,10 +22,6 @@ When /^I try to create a project without a name$/ do
   click_button 'Create Project'
 end
 
-Then /^I should be informed that the project has not been created$/ do
-  page.should have_content("Project has not been created.")
-end
-
 Then /^I should be told that the name is required$/ do
   page.should have_content("Name can't be blank")
 end
@@ -36,4 +32,11 @@ end
 
 When /^I navigate to the "([^"]*)" project page$/ do |name|
   click_link name
+end
+
+When /^I rename the "([^"]*)" project to "([^"]*)"$/ do |name, new_name|
+  click_link name
+  click_link 'Edit Project'
+  fill_in :Name, with: new_name
+  click_button 'Update Project'
 end
