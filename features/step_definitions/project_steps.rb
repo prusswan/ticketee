@@ -11,3 +11,8 @@ end
 Then /^I should be shown the message for project creation$/ do
   page.should have_content("Project has been created.")
 end
+
+Then /^I should be on the project page for "([^"]*)"$/ do |name|
+  current_path.should == project_path(Project.find_by_name!(name))
+  page.should have_content("#{name} - Projects - Ticketee")
+end
