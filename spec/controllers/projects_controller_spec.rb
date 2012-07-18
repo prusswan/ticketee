@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  let(:user)    { FactoryGirl.create(:user, confirmed_at: Time.now) }
+  let(:user)    { create_user! }
   let(:project) { FactoryGirl.create(:project) }
 
   context "standard users" do
