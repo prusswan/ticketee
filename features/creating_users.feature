@@ -32,3 +32,13 @@ Feature: Creating Users
     Then I should be informed that the user has not been created
     # And I should see "Email can't be blank"
     And I should be told that the email is required
+
+  Scenario: Creating an admin user
+    # And I fill in "Email" with "newadmin@ticketee.com"
+    # And I fill in "Password" with "password"
+    # And I check "Is an admin?"
+    # And I press "Create User"
+    And I create an admin user with the email "newadmin@ticketee.com" and the password "password"
+    # Then I should see "User has been created"
+    # And I should see "newadmin@ticketee.com (Admin)"
+    Then I should be informed that the admin user has been created

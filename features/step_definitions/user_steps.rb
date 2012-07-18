@@ -60,9 +60,10 @@ When /^I navigate to the users page$/ do
   click_on 'Users'
 end
 
-When /^I create a user with the email "(.*?)" and the password "(.*?)"$/ do |email, password|
+When /^I create a(?:n (admin)|) user with the email "(.*?)" and the password "(.*?)"$/ do |admin, email, password|
   click_on 'New User'
   fill_in 'Email',    with: email
   fill_in 'Password', with: password
+  check 'Is an admin?' if admin
   click_button 'Create User'
 end
