@@ -39,6 +39,8 @@ group :development do
   gem 'guard-cucumber'
 end
 
+gem 'devise'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
