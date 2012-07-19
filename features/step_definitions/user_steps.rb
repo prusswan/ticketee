@@ -93,3 +93,7 @@ end
 Then /^I should be told that the email is invalid$/ do
   page.should have_content('Email is invalid')
 end
+
+Then /^I should be informed that I cannot delete myself$/ do
+  page.should have_content('You cannot delete yourself!')
+end
