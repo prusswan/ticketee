@@ -67,3 +67,29 @@ When /^I create a(?:n (admin)|) user with the email "(.*?)" and the password "(.
   check 'Is an admin?' if admin
   click_button 'Create User'
 end
+
+When /^I update the user "(.*?)" with the email "(.*?)"$/ do |user, email|
+  click_on user
+  click_on 'Edit User'
+  fill_in 'Email',    with: email
+  click_button 'Update User'
+end
+
+Then /^I should( not)? be shown the user "(.*?)"$/ do |negate, user|
+  unless negate
+    page.should have_content user
+  else
+    page.should_not have_content user
+  end
+end
+
+When /^I update the user "(.*?)" to an admin$/ do |user|
+  click_on user
+  click_on 'Edit User'
+  check 'Is an admin?'
+  click_button 'Update User'
+end
+
+Then /^I should be told that the email is invalid$/ do
+  page.should have_content('Email is invalid')
+end
