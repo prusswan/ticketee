@@ -54,3 +54,15 @@ Given /^I am signed in as "(.*?)"(?: with the password "(.*?)"|)$/ do |user, pas
     Then I should be informed that I have signed in successfully
   })
 end
+
+When /^I navigate to the users page$/ do
+  click_on 'Admin'
+  click_on 'Users'
+end
+
+When /^I create a user with the email "(.*?)" and the password "(.*?)"$/ do |email, password|
+  click_on 'New User'
+  fill_in 'Email',    with: email
+  fill_in 'Password', with: password
+  click_button 'Create User'
+end
