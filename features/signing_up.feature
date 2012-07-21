@@ -13,3 +13,5 @@ Feature: Signing up
     When I sign up with the email "user@ticketee.com" and the password "password"
     # Then I should see "You have signed up successfully."
     Then I should be informed that I have signed up successfully
+    # Then I should see "Please confirm your account before signing in."
+    And I should be asked to confirm my account before signing in
