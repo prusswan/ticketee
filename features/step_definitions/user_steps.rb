@@ -101,3 +101,7 @@ end
 Then /^I should be asked to confirm my account before signing in$/ do
   page.should have_content('Please confirm your account before signing in.')
 end
+
+When /^I sign out$/ do
+  click_on 'Sign out'
+end
