@@ -10,7 +10,7 @@ guard 'cucumber', :change_format => 'pretty', keep_failed: false, all_after_pass
   watch(%r{^app/models/(?:(?:\w+/)*)(\w+)\.rb$})        { |m| Dir[File.join("**/*#{m[1]}*.feature")] }
   watch(%r{^app/views/(\w+)/.*\.erb$})                  { |m| Dir[File.join("**/*#{m[1][0..-2]}*.feature")] }
 
-  user_features = Dir[File.join("features/signing*.feature")]
+  user_features = Dir[File.join("features/signing*.feature")] + Dir[File.join("features/hidden*.feature")]
   watch(%r{^features/step_definitions/user_steps.rb$})  { user_features }
   watch(%r{^app/(model|controller)s/.*user.*\.rb$})     { user_features }
 
