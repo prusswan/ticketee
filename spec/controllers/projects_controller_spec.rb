@@ -4,6 +4,8 @@ describe ProjectsController do
   let(:user)    { create_user! }
   let(:project) { FactoryGirl.create(:project) }
 
+  before { sign_in(:user, user) }
+
   context "standard users" do
     { "new"     => "get",
       "create"  => "post",
@@ -17,6 +19,12 @@ describe ProjectsController do
         response.should redirect_to(root_path)
         flash[:alert].should eql("You must be an admin to do that.")
       end
+    end
+
+    it "cannot access the show action" do
+      get :show, :id => project.id
+      response.should redirect_to(projects_path)
+      flash[:alert].should eql("The project you were looking for could not be found.")
     end
   end
 
