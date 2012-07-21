@@ -11,6 +11,7 @@ Feature: Editing tickets
     And I am signed in as "user@ticketee.com"
     And there is a project called "TextMate 2"
     And "user@ticketee.com" can view the "TextMate 2" project
+    And "user@ticketee.com" can edit tickets in the "TextMate 2" project
     # And "user@ticketee.com" has created a ticket for this project:
     And that project has a ticket created by "user@ticketee.com":
       | title          | description                   |
