@@ -11,8 +11,11 @@ class TicketsController < ApplicationController
   end
 
   def create
+    asset = params[:ticket][:asset]
+    params[:ticket].delete(:asset)
     @ticket = @project.tickets.build(params[:ticket])
     @ticket.update_attribute('user', current_user)
+    @ticket.update_attribute('asset', asset) if asset
     if @ticket.save
       flash[:notice] = "Ticket has been created."
       redirect_to [@project, @ticket]

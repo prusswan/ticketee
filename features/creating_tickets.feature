@@ -44,3 +44,14 @@ Feature: Creating Tickets
     Then I should be informed that the ticket has not been created
     # And I should see "Description is too short"
     And I should be told that the description is too short
+
+  Scenario: Creating a ticket with an attachment
+    # When I fill in "Title" with "Add documentation for blink tag"
+    # And I fill in "Description" with "The blink tag has a speed attribute"
+    # And I attach the file "spec/fixtures/speed.txt" to "File"
+    # And I press "Create Ticket"
+    And I create a ticket with the title "Add documentation for blink tag" and the description "The blink tag has a speed attribute" and the attachment "spec/fixtures/speed.txt"
+    # Then I should see "Ticket has been created."
+    Then I should be informed that the ticket has been created
+    # Then I should see "speed.txt" within "#ticket .asset"
+    And I should be shown the ticket with the attachment "speed.txt"
