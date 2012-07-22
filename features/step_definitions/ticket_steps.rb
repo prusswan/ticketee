@@ -1,15 +1,22 @@
 creation_step = /^I\screate\sa\sticket
   (?:\swith\sthe\stitle\s"(.*?)"\sand\sthe\sdescription\s"([^"]*)"
-    (?:\sand\sthe\sattachment\s"([^"]*)"|)
+    (?:((?:\sand\sthe\sattachment\s"(?:[^"]*)"\sfor\s"(?:[^"]*)")+)|)
   |)$/x
 
-When creation_step do |title, description, file|
+When creation_step do |title, description, file_group|
   click_link 'New Ticket' if current_path == project_path(@project)
   if title and description
     fill_in 'Title', with: title
     fill_in 'Description', with: description
   end
-  attach_file 'File', Rails.root.join(file) if file
+
+  if file_group
+    groups = file_group.scan(/ and the attachment "([^"]*)" for "([^"]*)"/)
+    groups.each do |file, field|
+      attach_file field, Rails.root.join(file)
+    end
+  end
+
   click_button 'Create Ticket'
 end
 
@@ -55,5 +62,5 @@ When /^I rename the "([^"]*)" ticket to "([^"]*)"$/ do |name, new_name|
 end
 
 Then /^I should be shown the ticket with the attachment "(.*?)"$/ do |file|
-  within('#ticket .asset') { page.should have_content file }
+  within('#ticket .assets') { page.should have_content file }
 end

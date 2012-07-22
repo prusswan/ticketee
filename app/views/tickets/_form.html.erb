@@ -8,9 +8,13 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </p>
-  <p>
-    <%= f.label :asset, "File" %>
-    <%= f.file_field :asset %>
-  </p>
+  <% @ticket.assets.each_with_index do |a, index| %>
+    <%= f.fields_for :assets, a do |asset| %>
+      <p>
+        <%= asset.label :asset, "File ##{index + 1}" %>
+        <%= asset.file_field :asset %>
+      </p>
+    <% end %>
+  <% end %>
   <%= f.submit %>
 <% end %>
