@@ -86,6 +86,7 @@ GEM
       guard (>= 1.1.0)
     guard-rspec (1.2.0)
       guard (>= 1.1)
+    headless (0.3.1)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.4)
@@ -206,6 +207,7 @@ DEPENDENCIES
   guard
   guard-cucumber
   guard-rspec
+  headless
   jquery-rails
   paperclip
   rails (~> 3.2.1)
