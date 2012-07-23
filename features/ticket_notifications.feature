@@ -37,3 +37,31 @@ Feature: Ticket Notifications
     Then they follow "view this ticket online here" in the email
     # Then I should see "Release date" within "#ticket h2"
     Then I should be on the ticket page for "Release date"
+
+  Scenario: Comment authors are automatically subscribed to a ticket
+    # When I follow "TextMate 2"
+    When I navigate to the "TextMate 2" project page
+    # And I follow "Release date"
+    And I navigate to the "Release date" ticket page
+    # And I fill in "Text" with "Is it out yet?"
+    # And I press "Create Comment"
+    And I create a comment with the text "Is it out yet?"
+    # Then I should see "Comment has been created."
+    Then I should be informed that the comment has been created
+    # When I follow "Sign out"
+    When I sign out
+
+    Given a clear email queue
+
+    Given I am signed in as "alice@ticketee.com"
+    # When I follow "TextMate 2"
+    When I navigate to the "TextMate 2" project page
+    # And I follow "Release date"
+    And I navigate to the "Release date" ticket page
+    # And I fill in "Text" with "Not yet!"
+    # And I press "Create Comment"
+    And I create a comment with the text "Not yet!"
+    # Then I should see "Comment has been created."
+    Then I should be informed that the comment has been created
+    Then "bob@ticketee.com" should receive an email
+    Then "alice@ticketee.com" should have no emails
