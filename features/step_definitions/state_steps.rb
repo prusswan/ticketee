@@ -22,3 +22,14 @@ end
 Then /^I should be shown comments containing the state "(.*?)"$/ do |state|
   within('#comments') { page.should have_content state }
 end
+
+When /^I navigate to the states page$/ do
+  click_on 'Admin'
+  click_on 'States'
+end
+
+When /^I create a state called "(.*?)"$/ do |name|
+  click_on 'New State'
+  fill_in 'Name', with: name
+  click_button 'Create State'
+end
