@@ -14,6 +14,7 @@ When creation_step do |title, description, file_group|
     groups = file_group.scan(/ and the attachment "([^"]*)" for "([^"]*)"/)
     groups.each do |file, field|
       attach_file field, Rails.root.join(file)
+      click_link 'Add another file'
     end
   end
 
