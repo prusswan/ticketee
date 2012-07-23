@@ -1,6 +1,9 @@
-When /^I create a comment with the text "([^"]*)"(?: and the state "([^"]*)"|)$/ do |comment, state|
+creation_step = /^I create a comment with the text "([^"]*)"(?: and the state "([^"]*)"|)(?: and the tag "([^"]*)"|)$/
+
+When creation_step do |comment, state, tag|
   fill_in :text, with: comment
   select state, from: 'State' if state and not first('comment_state_id').nil?
+  fill_in 'Tags', with: tag unless tag.nil?
   click_button 'Create Comment'
 end
 
