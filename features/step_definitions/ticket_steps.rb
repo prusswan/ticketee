@@ -82,3 +82,8 @@ end
 Then /^I should not be shown the tag "(.*?)"$/ do |tag|
   page.should_not have_content tag
 end
+
+When /^I search for the tag "(.*?)"$/ do |tag|
+  fill_in 'Search', with: "tag:#{tag}"
+  click_button 'Search'
+end
