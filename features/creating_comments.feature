@@ -15,6 +15,7 @@ Feature: Creating comments
     And that project has a ticket created by "user@ticketee.com":
       | title                   | description                            |
       | Change a ticket's state | You should be able to create a comment |
+    And there is a state called "Open"
     Given I am on the homepage
     # And I follow "Ticketee"
     And I navigate to the "Ticketee" project page
@@ -39,3 +40,15 @@ Feature: Creating comments
     Then I should be informed that the comment has not been created
     # And I should see "Text can't be blank"
     And I should be told that the text is required
+
+  Scenario: Changing a ticket's state
+    # When I follow "Change a ticket's state"
+    When I navigate to the "Change a ticket's state" ticket page
+    # And I fill in "Text" with "This is a real issue"
+    # And I select "Open" from "State"
+    # And I press "Create Comment"
+    And I create a comment with the text "This is a real issue" and the state "Open"
+    # Then I should see "Comment has been created."
+    Then I should be informed that the comment has been created
+    # And I should see "Open" within "#ticket .state
+    And I should be shown the comment "This is a real issue" with the state "Open"

@@ -9,7 +9,11 @@ guard 'cucumber', :change_format => 'pretty', keep_failed: false, all_after_pass
     unless step_features.empty?
       step_features
     else
-      'features'
+      if m[1] =~ /state/
+        Dir[File.join("**/*comment*.feature")]
+      else
+        'features'
+      end
     end
   end
 
