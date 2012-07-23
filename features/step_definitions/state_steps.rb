@@ -33,3 +33,12 @@ When /^I create a state called "(.*?)"$/ do |name|
   fill_in 'Name', with: name
   click_button 'Create State'
 end
+
+When /^I follow "(.*?)" for the "(.*?)" state$/ do |link, name|
+  state = State.find_by_name!(name)
+  within("#state_#{state.id}") { click_on link }
+end
+
+Then /^I should be informed that "(.*?)" is now the default state$/ do |state|
+  page.should have_content "#{state} is now the default state."
+end
