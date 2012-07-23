@@ -25,6 +25,7 @@ Feature: Assigning permissions
       # And I follow "user@ticketee.com"
       # And I follow "Permissions"
       And I view the permissions for the user "user@ticketee.com"
+      Given there is a state called "Open"
 
     Scenario: Viewing a project
       # When I check "View" for "TextMate 2"
@@ -93,3 +94,26 @@ Feature: Assigning permissions
       And I delete the ticket called "Shiny!"
       # Then I should see "Ticket has been deleted."
       Then I should be informed that the ticket has been deleted
+
+    Scenario: Changing states for a ticket
+      # When I check "View" for "TextMate 2"
+      # And I check "Change States" for "TextMate 2"
+      # And I press "Update"
+      When I enable "View" for the project "TextMate 2"
+      And I enable "Change States" for the project "TextMate 2"
+      # And I follow "Sign out"
+      And I sign out
+
+      Given I am signed in as "user@ticketee.com"
+      # When I follow "TextMate 2"
+      When I navigate to the "TextMate 2" project page
+      # And I follow "Shiny!"
+      And I navigate to the "Shiny!" ticket page
+      # When I fill in "Text" with "Opening this ticket."
+      # And I select "Open" from "State"
+      # And I press "Create Comment"
+      And I create a comment with the text "Opening this ticket." and the state "Open"
+      # Then I should see "Comment has been created."
+      Then I should be informed that the comment has been created
+      # And I should see "Open" within "#ticket .state"
+      And I should be shown the comment "Opening this ticket." with the state "Open"

@@ -42,6 +42,7 @@ Feature: Creating comments
     And I should be told that the text is required
 
   Scenario: Changing a ticket's state
+    Given "user@ticketee.com" can change states on the "Ticketee" project
     # When I follow "Change a ticket's state"
     When I navigate to the "Change a ticket's state" ticket page
     # And I fill in "Text" with "This is a real issue"
@@ -54,3 +55,9 @@ Feature: Creating comments
     And I should be shown the comment "This is a real issue" with the state "Open"
     # And I should see "Open" within "#comments"
     And I should be shown comments containing the state "Open"
+
+  Scenario: A user without permission cannot change the state
+    # When I follow "Change a ticket's state"
+    When I navigate to the "Change a ticket's state" ticket page
+    When I create a comment with the text "This is a real issue" and the state "Open"
+    Then I should not see the "#comment_state_id" element

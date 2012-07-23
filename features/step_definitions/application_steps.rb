@@ -30,3 +30,7 @@ When /^I delete the (.+) called "([^"]*)"$/ do |model, name|
   click_link "Delete #{model.capitalize}"
   page.driver.browser.switch_to.alert.accept if Capybara.current_driver == :selenium
 end
+
+Then /^I should not see the "(.*?)" element$/ do |css|
+  page.should_not have_css(css), "Expected to not see the #{css} element, but did."
+end

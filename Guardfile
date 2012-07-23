@@ -6,11 +6,11 @@ guard 'cucumber', :change_format => 'pretty', keep_failed: false, all_after_pass
   watch(%r{^features/support/.+$})                      { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
     step_features = Dir[File.join("**/*#{m[1]}*.feature")]
-    unless step_features.empty?
-      step_features
+    if m[1] =~ /state/
+      step_features + Dir[File.join("**/*comment*.feature")]
     else
-      if m[1] =~ /state/
-        Dir[File.join("**/*comment*.feature")]
+      unless step_features.empty?
+        step_features
       else
         'features'
       end
