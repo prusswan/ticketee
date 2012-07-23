@@ -2,7 +2,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :project
   belongs_to :state
   belongs_to :user
-  attr_accessible :description, :title
+  attr_accessible :description, :title, :assets_attributes, :user
 
   has_many :assets
   accepts_nested_attributes_for :assets

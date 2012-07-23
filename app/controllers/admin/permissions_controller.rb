@@ -11,9 +11,7 @@ class Admin::PermissionsController < Admin::BaseController
     params[:permissions].each do |id, permissions|
       project = Project.find(id)
       permissions.each do |permission, checked|
-        permission = Permission.create!(:action => permission)
-        permission.update_attribute(:user, @user)
-        permission.update_attribute(:thing, project)
+        Permission.create!(action: permission, user: @user, thing: project)
       end
     end
     flash[:notice] = "Permissions updated."

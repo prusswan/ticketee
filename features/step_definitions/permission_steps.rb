@@ -5,9 +5,7 @@ Given permission_step do |user, permission, on, project|
 end
 
 def create_permission(email, object, action)
-  permission = Permission.create!(action: action)
-  permission.update_attribute(:user, User.find_by_email!(email))
-  permission.update_attribute(:thing, object)
+  Permission.create!(action: action, user: User.find_by_email!(email), thing: object)
 end
 
 def find_project(name)

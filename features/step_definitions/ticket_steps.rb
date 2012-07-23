@@ -27,8 +27,8 @@ end
 
 Given /^that project has a ticket(?: created by "(.*?)"|):$/ do |user, table|
   table.hashes.each do |attributes|
-    ticket = @project.tickets.create!(attributes)
-    ticket.update_attribute('user', User.find_by_email!(user)) if user
+    attributes = attributes.merge!(:user => User.find_by_email!(user))
+    @project.tickets.create!(attributes)
   end
 end
 

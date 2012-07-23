@@ -16,9 +16,7 @@ describe TicketsController do
     context "with permission to view the project" do
       before do
         sign_in(:user, user)
-        permission = Permission.create!(:action => "view")
-        permission.update_attribute(:user, user)
-        permission.update_attribute(:thing, project)
+        Permission.create!(:action => "view", user: user, thing: project)
       end
 
       def cannot_create_tickets!
