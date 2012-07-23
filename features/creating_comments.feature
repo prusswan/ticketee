@@ -11,6 +11,7 @@ Feature: Creating comments
     And I am signed in as "user@ticketee.com"
     And there is a project called "Ticketee"
     And "user@ticketee.com" can view the "Ticketee" project
+    And "user@ticketee.com" can tag the "Ticketee" project
     # And "user@ticketee.com" has created a ticket for this project:
     And that project has a ticket created by "user@ticketee.com":
       | title                   | description                            |

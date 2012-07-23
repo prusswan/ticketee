@@ -30,8 +30,10 @@ end
 
 Given /^that project has a ticket(?: created by "(.*?)"|):$/ do |user, table|
   table.hashes.each do |attributes|
-    attributes = attributes.merge!(:user => User.find_by_email!(user))
-    @project.tickets.create!(attributes)
+    tags = attributes.delete("tags")
+    attributes.merge!(:user => User.find_by_email!(user))
+    ticket = @project.tickets.create!(attributes)
+    ticket.tag!(tags) if tags
   end
 end
 
@@ -71,4 +73,12 @@ end
 
 Then /^I should be shown the ticket with the tag "(.*?)"$/ do |tag|
   within('#ticket #tags') { page.should have_content tag }
+end
+
+When /^I delete the tag "(.*?)"$/ do |tag|
+  click_link "delete-#{tag}"
+end
+
+Then /^I should not be shown the tag "(.*?)"$/ do |tag|
+  page.should_not have_content tag
 end
