@@ -31,9 +31,12 @@ end
 Given /^that project has a ticket(?: created by "(.*?)"|):$/ do |user, table|
   table.hashes.each do |attributes|
     tags = attributes.delete("tags")
+    state = attributes.delete("state")
     attributes.merge!(:user => User.find_by_email!(user))
     ticket = @project.tickets.create!(attributes)
+    ticket.state = State.find_or_create_by_name(state) if state
     ticket.tag!(tags) if tags
+    ticket.save
   end
 end
 
@@ -83,7 +86,7 @@ Then /^I should not be shown the tag "(.*?)"$/ do |tag|
   page.should_not have_content tag
 end
 
-When /^I search for the tag "(.*?)"$/ do |tag|
-  fill_in 'Search', with: "tag:#{tag}"
+When /^I search for the (.*?) "(.*?)"$/ do |category, tag|
+  fill_in 'Search', with: "#{category}:#{tag}"
   click_button 'Search'
 end

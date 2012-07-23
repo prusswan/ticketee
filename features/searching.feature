@@ -14,12 +14,12 @@ Feature: Searching
     And "user@ticketee.com" can tag the "Ticketee" project
     # And "user@ticketee.com" has created a ticket for this project:
     And that project has a ticket created by "user@ticketee.com":
-      | title | description     | tags        |
-      | Tag!  | Hey! You're it! | iteration_1 |
+      | title | description     | tags        | state |
+      | Tag!  | Hey! You're it! | iteration_1 | Open  |
     # And "user@ticketee.com" has created a ticket for this project:
     And that project has a ticket created by "user@ticketee.com":
-      | title   | description      | tags        |
-      | Tagged! | Hey! I'm it now! | iteration_2 |
+      | title   | description      | tags        | state  |
+      | Tagged! | Hey! I'm it now! | iteration_2 | Closed |
     Given I am on the homepage
     # And I follow "Ticketee" within "#projects"
     And I navigate to the "Ticketee" project page
@@ -28,6 +28,15 @@ Feature: Searching
     # When I fill in "Search" with "tag:iteration_1"
     # And I press "Search"
     When I search for the tag "iteration_1"
+    # Then I should see "Tag!"
+    Then I should be shown the ticket "Tag!"
+    # And I should not see "Tagged!"
+    And I should not be shown the ticket "Tagged!"
+
+  Scenario: Finding by state
+    # When I fill in "Search" with "state:Open"
+    # And I press "Search"
+    When I search for the state "Open"
     # Then I should see "Tag!"
     Then I should be shown the ticket "Tag!"
     # And I should not see "Tagged!"
