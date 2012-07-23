@@ -18,3 +18,7 @@ end
 Then /^I should be shown the state "(.*?)"$/ do |state|
   within('#comment_state_id') { page.should have_content state }
 end
+
+Then /^I should be shown comments containing the state "(.*?)"$/ do |state|
+  within('#comments') { page.should have_content state }
+end
