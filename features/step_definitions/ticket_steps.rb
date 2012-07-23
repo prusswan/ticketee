@@ -59,7 +59,7 @@ Then /^I should( not)? be on the ticket page for "([^"]*)"$/ do |negate, title|
   end
 end
 
-When /^I navigate to the "([^"]*)" ticket page$/ do |name|
+When /^I navigate to the "([^"]*)" (?:ticket|tag) page$/ do |name|
   click_link name
 end
 

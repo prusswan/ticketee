@@ -41,3 +41,13 @@ Feature: Searching
     Then I should be shown the ticket "Tag!"
     # And I should not see "Tagged!"
     And I should not be shown the ticket "Tagged!"
+
+  Scenario: Clicking a tag goes to search results
+    # When I follow "Tag!"
+    When I navigate to the "Tag!" ticket page
+    # And I follow "iteration_1"
+    And I navigate to the "iteration_1" tag page
+    # Then I should see "Tag!"
+    Then I should be shown the ticket "Tag!"
+    # And I should not see "Tagged!"
+    And I should not be shown the ticket "Tagged!"
