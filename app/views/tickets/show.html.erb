@@ -8,7 +8,7 @@
       :data => { :confirm => "Are you sure you want to delete this ticket?" } %>
   <% end %>
   <br>
-  <small>Created by <%= @ticket.user.email %></small>
+  <small>Created by <%= @ticket.user.display_name %></small>
   <%= render @ticket.state if @ticket.state %>
   <%= simple_format(@ticket.description) %>
   <div id='tags'><%= render @ticket.tags %></div>

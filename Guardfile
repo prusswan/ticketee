@@ -15,6 +15,8 @@ group :features do
         step_features + Dir[File.join("**/*comment*.feature")]
       elsif m[1] =~ /app_email/
         Dir[File.join("**/*gmail*.feature")] + Dir[File.join("**/*notification*.feature")]
+      elsif m[1] =~ /auth/
+        Dir[File.join("**/*auth*.feature")]
       else
         unless step_features.empty?
           step_features
