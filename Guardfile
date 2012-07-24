@@ -62,7 +62,7 @@ group :specs do
       unless api_specs.empty?
         api_specs
       else
-        "spec/api"
+        "spec/api/#{m[1]}"
       end
     end
 
