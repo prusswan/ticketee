@@ -42,6 +42,7 @@ group :development do
   gem 'guard'
   gem 'guard-cucumber'
   gem 'guard-rspec'
+  gem 'guard-shell'
 end
 
 gem 'devise'
