@@ -90,3 +90,19 @@ When /^I search for the (.*?) "(.*?)"$/ do |category, tag|
   fill_in 'Search', with: "#{category}:#{tag}"
   click_button 'Search'
 end
+
+Then /^I should( not)? be shown the watcher "(.*?)"$/ do |negate, watcher|
+  unless negate
+    within('#watchers') { page.should have_content(watcher) }
+  else
+    within('#watchers') { page.should_not have_content(watcher) }
+  end
+end
+
+Then /^I (start|stop) watching the ticket$/ do |status|
+  if status == 'start'
+    click_button 'Watch this ticket'
+  else
+    click_button 'Stop watching this ticket'
+  end
+end
