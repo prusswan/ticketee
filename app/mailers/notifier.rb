@@ -4,6 +4,8 @@ class Notifier < ActionMailer::Base
   def comment_updated(comment, user)
     @comment = comment
     @user = user
-    mail(to: user.email, subject: "[ticketee] #{comment.ticket.project.name} - #{comment.ticket.title}")
+    mail(from: "Ticketee <youraccount+#{comment.project.id}+#{comment.ticket_id}@example.com>",
+         to: user.email,
+         subject: "[ticketee] #{comment.ticket.project.name} - #{comment.ticket.title}")
   end
 end
