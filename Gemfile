@@ -43,6 +43,9 @@ group :development do
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'guard-shell'
+  gem 'capistrano'
+  gem 'capistrano_colors'
+  gem 'rvm-capistrano'
 end
 
 gem 'devise'
