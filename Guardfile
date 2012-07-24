@@ -8,6 +8,8 @@ guard 'cucumber', :change_format => 'pretty', keep_failed: false, all_after_pass
     step_features = Dir[File.join("**/*#{m[1]}*.feature")]
     if m[1] =~ /state/
       step_features + Dir[File.join("**/*comment*.feature")]
+    elsif m[1] =~ /app_email/
+      Dir[File.join("**/*gmail*.feature")] + Dir[File.join("**/*notification*.feature")]
     else
       unless step_features.empty?
         step_features
