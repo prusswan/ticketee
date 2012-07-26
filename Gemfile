@@ -55,6 +55,7 @@ gem 'cancan'
 
 gem 'paperclip'
 gem 'searcher'
+gem 'kaminari'
 
 gem 'omniauth-twitter'
 gem 'omniauth-github'

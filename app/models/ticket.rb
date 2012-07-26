@@ -3,6 +3,7 @@ class Ticket < ActiveRecord::Base
     label :tag, :from => :tags, :field => :name
     label :state, :from => :state, :field => :name
   end
+  paginates_per 50
 
   belongs_to :project
   belongs_to :state

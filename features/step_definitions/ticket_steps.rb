@@ -106,3 +106,23 @@ Then /^I (start|stop) watching the ticket$/ do |status|
     click_button 'Stop watching this ticket'
   end
 end
+
+Given /^there are (\d+) tickets for this project$/ do |number|
+  number.to_i.times do |i|
+    @project.tickets.create!(:title => "Test", :description => "Placeholder ticket.", :user => @user)
+  end
+end
+
+Then /^I should see (\d+) pages of pagination$/ do |number|
+  pages = all(".pagination .page")
+  pages.count.should eql(number.to_i)
+end
+
+When /^I navigate to the next page$/ do
+  within('.pagination .next') { click_link 'Next'}
+end
+
+Then /^I see page (\d+) of tickets for this project$/ do |number|
+  current_page = find(".pagination .current").text.strip
+  current_page.should eql(number)
+end
