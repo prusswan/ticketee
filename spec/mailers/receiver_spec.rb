@@ -3,6 +3,8 @@ require "spec_helper"
 describe Receiver do
   it "parses a reply from a comment update into a comment" do
     comment = FactoryGirl.create(:comment)
+    Delayed::Worker.new.work_off
+
     ticket = comment.ticket
 
     comment_email = ActionMailer::Base.deliveries.last

@@ -5,6 +5,8 @@ When creation_step do |comment, state, tag|
   select state, from: 'State' if state and not first('comment_state_id').nil?
   fill_in 'Tags', with: tag unless tag.nil?
   click_button 'Create Comment'
+
+  Delayed::Worker.new.work_off
 end
 
 Then /^I should be shown the comment "([^"]*)"(?: with the state "([^"]*)"|)$/ do |comment, state|
