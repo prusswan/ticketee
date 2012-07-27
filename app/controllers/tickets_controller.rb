@@ -30,6 +30,9 @@ class TicketsController < ApplicationController
   def show
     @comment = @ticket.comments.build
     @states = State.all
+
+    fresh_when :last_modified => @ticket.updated_at,
+               :etag => @project.id.to_s + @ticket.id.to_s + current_user.id.to_s
   end
 
   def edit
