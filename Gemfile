@@ -63,6 +63,8 @@ gem 'omniauth-github'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 
+gem 'prusswan-forem', :require => "forem"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

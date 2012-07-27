@@ -60,9 +60,6 @@ class Admin::UsersController < Admin::BaseController
     end
 
     def set_admin
-      admin = params[:user][:admin] == "1"
-      params[:user].delete("admin")
       @user = User.new(params[:user]) unless @user
-      @user.update_attribute("admin", admin)
     end
 end

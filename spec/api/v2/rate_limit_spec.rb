@@ -11,7 +11,7 @@ describe "rate limiting", :type => :api do
   end
 
   it "stops a user if they have exceeded the limit" do
-    user.update_attribute(:request_count, 200)
+    user.update_attributes(request_count: 200)
     get '/api/v2/projects.json', :token => user.authentication_token
     error = { :error => "Rate limit exceeded." }
     last_response.status.should eql(403)

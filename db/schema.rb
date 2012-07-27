@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727005849) do
+ActiveRecord::Schema.define(:version => 20120727205033) do
 
   create_table "assets", :force => true do |t|
     t.string   "asset_file_name"
@@ -48,6 +48,22 @@ ActiveRecord::Schema.define(:version => 20120727005849) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "forem_posts", :force => true do |t|
+    t.integer  "topic_id"
+    t.text     "text"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "forem_topics", :force => true do |t|
+    t.text     "subject"
+    t.integer  "user_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "posts_count", :default => 0
+  end
 
   create_table "permissions", :force => true do |t|
     t.integer  "user_id"

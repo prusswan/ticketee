@@ -64,6 +64,8 @@ Ticketee::Application.routes.draw do
 
   resources :files
 
+  mount Forem::Engine, :at => "/forem"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

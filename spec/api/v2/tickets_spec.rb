@@ -4,8 +4,7 @@ describe "/api/v2/tickets", :type => :api do
   let(:project) { FactoryGirl.create(:project, :name => "Ticketee") }
 
   before do
-    @user = create_user!
-    @user.update_attribute(:admin, true)
+    @user = create_user!(admin: true)
     @user.permissions.create!(:action => "view", :thing => project)
   end
 
