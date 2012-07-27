@@ -6,6 +6,8 @@ class TicketsController < ApplicationController
   before_filter :authorize_update!, :only => [:edit, :update]
   before_filter :authorize_delete!, :only => :destroy
 
+  cache_sweeper :tickets_sweeper, :only => [:create, :update, :destroy]
+
   def new
     @ticket = @project.tickets.build
     @ticket.assets.build
