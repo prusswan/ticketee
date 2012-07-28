@@ -37,4 +37,7 @@ Ticketee::Application.configure do
   config.assets.logger = false
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  #require 'link_jumbler'
+  #config.middleware.use LinkJumbler, { "e" => "a" }
 end
