@@ -59,7 +59,7 @@ group :specs do
     watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
     watch('config/routes.rb')                           { "spec/controllers" }
     watch('app/controllers/application_controller.rb')  { "spec/controllers" }
-    watch(%r{^app/controllers/api/(\w+)/(?:(?:\w+/)*)(\w+)_(controller)\.rb$}) do |m|
+    watch(%r{^app/controllers/api/(\w+)/(?:(?:\w+/)*)(\w+)(_controller|)\.rb$}) do |m|
       api_specs = Dir[File.join("spec/api/#{m[1]}/*#{m[2][0..-2]}*_spec.rb")]
       unless api_specs.empty?
         api_specs

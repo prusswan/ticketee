@@ -1,3 +1,5 @@
+require 'heartbeat/application'
+
 Ticketee::Application.routes.draw do
   namespace :api do
     namespace :v1 do
@@ -5,12 +7,16 @@ Ticketee::Application.routes.draw do
         resources :tickets
       end
     end
-  end
 
-  namespace :api do
     namespace :v2 do
       resources :projects do
         resources :tickets
+      end
+    end
+
+    namespace :v3 do
+      namespace :json do
+        mount Api::V3::JSON::Tickets, :at => "/projects/:project_id/tickets"
       end
     end
   end
@@ -65,6 +71,7 @@ Ticketee::Application.routes.draw do
   resources :files
 
   mount Forem::Engine, :at => "/forem"
+  mount Heartbeat::Application, :at => "/heartbeat"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
