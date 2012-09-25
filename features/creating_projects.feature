@@ -12,7 +12,7 @@ Feature: Creating projects
     # And I press "Create Project"
     When I create a project called "TextMate 2"
     # Then I should see "Project has been created."
-    Then I should be shown the message for project creation
+    Then I should be informed that the project has been created
     And I should be on the project page for "TextMate 2"
     # And I should see "TextMate 2 - Projects - Ticketee"
 
