@@ -29,10 +29,10 @@ Then /^I should be told that(?: both| the|) ([^"]*) (?:is|are) required$/ do |at
 end
 
 Given /^there is a project called "([^\"]*)"$/ do |name|
-  FactoryGirl.create(:project, name: name)
+  @project = FactoryGirl.create(:project, name: name)
 end
 
-When /^I navigate to the "([^"]*)" project page$/ do |name|
+When /^I navigate to the "([^"]*)" (?:project|ticket) page$/ do |name|
   click_link name
 end
 
