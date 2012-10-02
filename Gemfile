@@ -38,9 +38,14 @@ end
 
 group :development do
   gem 'guard'
+  gem 'rb-fsevent', :require => false, :platforms => :ruby
+  gem 'rb-inotify', :require => false, :platforms => :ruby
+  gem 'wdm',        :require => false, :platforms => [:mswin, :mingw]
+
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'guard-shell'
+
   gem 'capistrano'
   gem 'capistrano_colors'
   gem 'rvm-capistrano'
