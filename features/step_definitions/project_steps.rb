@@ -17,6 +17,14 @@ Then /^I should be informed that the( admin)? ([^"]*) has(|\snot) been ([^\"]*)(
   end
 end
 
+Then /^I should( not)? be shown the project "(.*?)"$/ do |negate, project|
+  unless negate
+    page.should have_content project
+  else
+    page.should_not have_content project
+  end
+end
+
 Then /^I should( not)? be on the project page for "([^"]*)"$/ do |negate, name|
   unless negate
     current_path.should == project_path(Project.find_by_name!(name))

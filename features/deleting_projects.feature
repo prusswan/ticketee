@@ -19,4 +19,4 @@ Feature: Deleting projects
     # Then I should see "Project has been deleted."
     Then I should be informed that the project has been deleted
     # And I should not see "TextMate 2"
-    And I should not be on the project page for "TextMate 2"
+    And I should not be shown the project "TextMate 2"
