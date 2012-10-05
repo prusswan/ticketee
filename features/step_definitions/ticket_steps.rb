@@ -75,3 +75,11 @@ end
 Then /^I should be shown the ticket with the tag "(.*?)"$/ do |tag|
   within('#ticket #tags') { page.should have_content tag }
 end
+
+When /^I delete the tag "(.*?)"$/ do |tag|
+  click_link "delete-#{tag}"
+end
+
+Then /^I should not be shown the tag "(.*?)"$/ do |tag|
+  page.should_not have_content tag
+end
