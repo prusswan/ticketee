@@ -1,6 +1,6 @@
 When /^I create a comment with the text "([^"]*)"(?: and the state "([^"]*)"|)$/ do |comment, state|
   fill_in :text, with: comment
-  select state, from: 'State' if state
+  select state, from: 'State' if state and not first('comment_state_id').nil?
   click_button 'Create Comment'
 end
 
