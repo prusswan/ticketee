@@ -30,9 +30,16 @@ end
 
 Given /^that project has a ticket(?: created by "(.*?)"|):$/ do |user, table|
   table.hashes.each do |attributes|
+    state = attributes.delete("state")
     ticket = @project.tickets.build(attributes)
+
     if user
       ticket.user = User.find_by_email!(user)
+      ticket.save
+    end
+
+    if state
+      ticket.state = State.find_or_create_by_name(state)
       ticket.save
     end
   end
@@ -57,7 +64,7 @@ Then /^I should( not)? be on the ticket page for "([^"]*)"$/ do |negate, title|
   end
 end
 
-When /^I navigate to the "([^"]*)" ticket page$/ do |name|
+When /^I navigate to the "([^"]*)" (?:ticket|tag) page$/ do |name|
   click_link name
 end
 
@@ -82,4 +89,9 @@ end
 
 Then /^I should not be shown the tag "(.*?)"$/ do |tag|
   page.should_not have_content tag
+end
+
+When /^I search for the (.*?) "(.*?)"$/ do |category, tag|
+  fill_in 'Search', with: "#{category}:#{tag}"
+  click_button 'Search'
 end
