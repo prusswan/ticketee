@@ -4,7 +4,7 @@ creation_step = /^I\screate\sa\sticket
   |)$/x
 
 When creation_step do |title, description, file_group|
-  click_link 'New Ticket' if current_path == project_path(@project)
+  click_link 'New Ticket' unless first(:xpath, "//a[text()='New Ticket']").nil?
   if title and description
     fill_in 'Title', with: title
     fill_in 'Description', with: description
