@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe ProjectsController do
   let(:user)    { FactoryGirl.create(:user, confirmed_at: Time.now) }
-  let(:project) { mock_model(Project, :id => 1) }
+  let(:project) { FactoryGirl.create(:project) }
+
+  before { sign_in(:user, user) }
 
   context "standard users" do
     { "new"     => "get",
@@ -12,11 +14,16 @@ describe ProjectsController do
       "destroy" => "delete"
     }.each do |action, method|
       it "cannot access the #{action} action" do
-        sign_in(:user, user)
         send(method, action.dup, :id => project.id)
         response.should redirect_to(root_path)
         flash[:alert].should eql("You must be an admin to do that.")
       end
+    end
+
+    it "cannot access the show action without permission" do
+      get :show, :id => project.id
+      response.should redirect_to(projects_path)
+      flash[:alert].should eql("The project you were looking for could not be found.")
     end
   end
 

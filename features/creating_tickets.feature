@@ -8,18 +8,13 @@ Feature: Creating Tickets
     And there are the following users:
       | email             | password |
       | user@ticketee.com | password |
+    And "user@ticketee.com" can view the "Internet Explorer" project
+    # And I am signed in as them
+    And I am signed in as "user@ticketee.com"
     And I am on the homepage
     # When I follow "Internet Explorer"
     When I navigate to the "Internet Explorer" project page
     # And I follow "New Ticket"
-    And I create a ticket
-    # Then I should see "You need to sign in or sign up before continuing."
-    Then I should be informed that I need to sign in or sign up
-    # When I fill in "Email" with "user@ticketee.com"
-    # And I fill in "Password" with "password"
-    # And I press "Sign in"
-    When I sign in with the email "user@ticketee.com" and the password "password"
-    # Then I should see "New Ticket
 
   Scenario: Creating a ticket
     # When I fill in "Title" with "Non-standards compliance"
