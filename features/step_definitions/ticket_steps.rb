@@ -1,10 +1,16 @@
-When /^I create a ticket(?: with the title "(.*?)" and the description "(.*?)"|)$/ do |title, description|
+creation_step = /^I\screate\sa\sticket
+  (?:\swith\sthe\stitle\s"(.*?)"\sand\sthe\sdescription\s"([^"]*)"
+    (?:\sand\sthe\sattachment\s"([^"]*)"|)
+  |)$/x
+
+When creation_step do |title, description, file|
   click_link 'New Ticket' if current_path == project_path(@project)
   if title and description
     fill_in 'Title', with: title
     fill_in 'Description', with: description
-    click_button 'Create Ticket'
   end
+  attach_file 'File', Rails.root.join(file) if file
+  click_button 'Create Ticket'
 end
 
 Then /^I should be told that the description is too short$/ do
@@ -49,4 +55,8 @@ When /^I rename the "([^"]*)" ticket to "([^"]*)"$/ do |name, new_name|
   click_link 'Edit Ticket'
   fill_in :Name, with: new_name
   click_button 'Update Ticket'
+end
+
+Then /^I should be shown the ticket with the attachment "(.*?)"$/ do |file|
+  within('#ticket .asset') { page.should have_content file }
 end
