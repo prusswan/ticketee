@@ -14,9 +14,10 @@ feature 'Deleting tickets' do
     click_link ticket.title
   end
 
-  scenario "Deleting a ticket" do
+  scenario "Deleting a ticket", js: true do
     click_link "Delete Ticket"
+    page.driver.browser.switch_to.alert.accept
     page.should have_content("Ticket has been deleted.")
-    page.current_url.should == project_url(project)
+    page.current_path.should == project_path(project)
   end
 end

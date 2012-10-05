@@ -45,19 +45,18 @@ Feature: Creating Tickets
     # And I should see "Description is too short"
     And I should be told that the description is too short
 
+  @javascript
   Scenario: Creating a ticket with an attachment
     # When I fill in "Title" with "Add documentation for blink tag"
     # And I fill in "Description" with "The blink tag has a speed attribute"
     # And I attach the file "spec/fixtures/speed.txt" to "File #1"
+    # And I follow "Add another file"
     # And I attach the file "spec/fixtures/spin.txt" to "File #2"
-    # And I attach the file "spec/fixtures/gradient.txt" to "File #3"
     # And I press "Create Ticket"
-    And I create a ticket with the title "Add documentation for blink tag" and the description "The blink tag has a speed attribute" and the attachment "spec/fixtures/speed.txt" for "File #1" and the attachment "spec/fixtures/spin.txt" for "File #2" and the attachment "spec/fixtures/gradient.txt" for "File #3"
+    And I create a ticket with the title "Add documentation for blink tag" and the description "The blink tag has a speed attribute" and the attachment "spec/fixtures/speed.txt" for "File #1" and the attachment "spec/fixtures/spin.txt" for "File #2"
     # Then I should see "Ticket has been created."
     Then I should be informed that the ticket has been created
     # And I should see "speed.txt" within "#ticket .asset"
     And I should be shown the ticket with the attachment "speed.txt"
     # And I should see "spin.txt" within "#ticket .assets"
     And I should be shown the ticket with the attachment "spin.txt"
-    # And I should see "gradient.txt" within "#ticket .assets"
-    And I should be shown the ticket with the attachment "gradient.txt"
