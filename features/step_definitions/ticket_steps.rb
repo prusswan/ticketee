@@ -1,17 +1,20 @@
-When /^I create a ticket with the title "(.*?)" and the description "(.*?)"$/ do |title, description|
-  click_link 'New Ticket'
-  fill_in 'Title', with: title
-  fill_in 'Description', with: description
-  click_button 'Create Ticket'
+When /^I create a ticket(?: with the title "(.*?)" and the description "(.*?)"|)$/ do |title, description|
+  click_link 'New Ticket' if current_path == project_path(@project)
+  if title and description
+    fill_in 'Title', with: title
+    fill_in 'Description', with: description
+    click_button 'Create Ticket'
+  end
 end
 
 Then /^I should be told that the description is too short$/ do
   page.should have_content('Description is too short')
 end
 
-Given /^that project has a ticket:$/ do |table|
+Given /^that project has a ticket(?: created by "(.*?)"|):$/ do |user, table|
   table.hashes.each do |attributes|
-    @project.tickets.create!(attributes)
+    ticket = @project.tickets.create!(attributes)
+    ticket.update_attribute('user', User.find_by_email!(user)) if user
   end
 end
 
