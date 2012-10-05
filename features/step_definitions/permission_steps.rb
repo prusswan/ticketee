@@ -13,3 +13,16 @@ end
 def find_project(name)
   Project.find_by_name!(name)
 end
+
+When /^I view the permissions for the user "(.*?)"$/ do |user|
+  click_on user
+  click_on 'Permissions'
+end
+
+When /^I enable "(.*?)" for the project "(.*?)"$/ do |action, name|
+  project = Project.find_by_name!(name)
+  permission = action.downcase.gsub(" ", "_")
+  field_id = "permissions_#{project.id}_#{permission}"
+  check field_id
+  click_button 'Update'
+end
