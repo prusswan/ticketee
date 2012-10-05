@@ -22,7 +22,7 @@ Then /^I should be informed that my account was (.*+)$/ do |message|
   page.should have_content("Your account was #{message}")
 end
 
-Then /^I am signed in as "(.*?)"$/ do |user|
+Then /^I should be signed in as "(.*?)"$/ do |user|
   page.should have_content("Signed in as #{user}")
 end
 
@@ -31,4 +31,24 @@ When /^I sign in with the email "(.*?)" and the password "(.*?)"$/ do |email, pa
   fill_in 'Email',    with: email
   fill_in 'Password', with: password
   click_button 'Sign in'
+end
+
+Then /^I should be informed that I need to (.+)$/ do |message|
+  page.should have_content("need to #{message}")
+end
+
+Given /^I am signed in as "(.*?)"(?: with the password "(.*?)"|)$/ do |user, password|
+  # When I follow "Sign in"
+  # And I fill in "Email" with "#{@user.email}"
+  # And I fill in "Password" with "password"
+  # And I press "Sign in"
+  # Then I should see "Signed in successfully."
+
+  password = "password" unless password
+
+  steps(%Q{
+    Given I am on the homepage
+    When I sign in with the email "#{user}" and the password "#{password}"
+    Then I should be informed that I have signed in successfully
+  })
 end

@@ -8,8 +8,12 @@ When /^I create a project called "([^"]*)"$/ do |name|
   click_button 'Create Project'
 end
 
-Then /^I should be informed that the ([^"]*) has(|\snot) been ([^\"]*)$/ do |model, negate, action|
-  page.should have_content("#{model.capitalize} has#{negate} been #{action}.")
+Then /^I should be informed that the ([^"]*) has(|\snot) been ([^\"]*)(?: by "(.*?)"|)$/ do |model, negate, action, user|
+  unless user
+    page.should have_content("#{model.capitalize} has#{negate} been #{action}.")
+  else
+    page.body.should match(%r{#{action} by #{user}}i)
+  end
 end
 
 Then /^I should( not)? be on the project page for "([^"]*)"$/ do |negate, name|
