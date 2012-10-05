@@ -1,5 +1,6 @@
 class Notifier < ActionMailer::Base
-  default from: "ticketee@gmail.com"
+  from_address = ActionMailer::Base.smtp_settings[:user_name]
+  default from: "Ticketee App <#{from_address}>"
 
   def comment_updated(comment, user, use_html=true)
     @comment = comment
