@@ -6,7 +6,7 @@ When /^I sign up with the email "(.*?)" and the password "(.*?)"$/ do |email, pa
   click_button 'Sign up'
 end
 
-Then /^I should be informed that I have (.*+)$/ do |message|
+Then /^I should be informed that I (?:have|am) (.*+)$/ do |message|
   page.body.should match(%r{#{message}}i)
 end
 
