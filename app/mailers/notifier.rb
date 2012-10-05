@@ -8,10 +8,12 @@ class Notifier < ActionMailer::Base
     @ticket = comment.ticket
     @project = @ticket.project
     subject = "[ticketee] #{@project.name} - #{@ticket.title}"
+    reply_to = "Ticketee App <youraccount+#{@project.id}+#{@ticket.id}@gmail.com>"
 
     mail_options = {
       to: user.email,
-      subject: subject
+      subject: subject,
+      reply_to: reply_to
     }
     mail_options.merge!(content_type: 'text/html') if use_html
 
