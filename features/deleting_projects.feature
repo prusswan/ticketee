@@ -3,6 +3,13 @@ Feature: Deleting projects
   As a project manager
   I want to make them disappear
 
+  Background:
+    Given there are the following users:
+      | email              | password | admin |
+      | admin@ticketee.com | password | true  |
+    # And I am signed in as them
+    And I am signed in as "admin@ticketee.com"
+
   Scenario: Deleting a project
     Given there is a project called "TextMate 2"
     And I am on the homepage
