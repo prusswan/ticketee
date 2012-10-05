@@ -43,7 +43,8 @@ When /^I rename the "([^"]*)" project to "([^"]*)"$/ do |name, new_name|
   click_button 'Update Project'
 end
 
-When /^I delete the project called "([^"]*)"$/ do |name|
+When /^I delete the (project|ticket) called "([^"]*)"$/ do |model, name|
   click_link name
-  click_link 'Delete Project'
+  click_link "Delete #{model.capitalize}"
+  page.driver.browser.switch_to.alert.accept if Capybara.current_driver == :selenium
 end
