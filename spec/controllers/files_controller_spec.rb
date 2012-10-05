@@ -11,8 +11,7 @@ describe FilesController do
   let(:asset) { ticket.assets.create(:asset => File.open(path)) }
 
   before do
-    permission = good_user.permissions.create!(action: "view")
-    permission.update_attribute(:thing, project)
+    good_user.permissions.create!(action: "view", thing: project)
   end
 
   context "users with access" do

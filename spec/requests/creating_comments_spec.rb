@@ -8,6 +8,7 @@ feature "Creating comments" do
   before do
     define_permission!(user, "view", project)
     FactoryGirl.create(:state, :name => "Open")
+    FactoryGirl.create(:state, :name => "Closed")
 
     sign_in_as!(user)
     visit '/'
@@ -37,6 +38,20 @@ feature "Creating comments" do
     page.should have_content("Comment has been created.")
     within("#ticket .state") do
       page.should have_content("Open")
+    end
+    within("#comments") do
+      page.should have_content("State: Open")
+    end
+
+    fill_in "Text", :with => "Closing the issue"
+    select "Closed", :from => "State"
+    click_button "Create Comment"
+    within("#ticket .state") do
+      page.should have_content("Closed")
+    end
+    within("#comments") do
+      page.should have_css('.state_open')
+      page.should have_css('.state_closed')
     end
   end
 end

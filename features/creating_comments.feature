@@ -52,3 +52,5 @@ Feature: Creating comments
     Then I should be informed that the comment has been created
     # And I should see "Open" within "#ticket .state
     And I should be shown the comment "This is a real issue" with the state "Open"
+    # And I should see "Open" within "#comments"
+    And I should be shown comments containing the state "Open"
