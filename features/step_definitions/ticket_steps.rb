@@ -54,8 +54,8 @@ Then /^I should( not)? be on the ticket page for "([^"]*)"$/ do |negate, title|
   end
 end
 
-When /^I navigate to the homepage$/ do
-  click_link 'Ticketee'
+When /^I navigate to the "([^"]*)" ticket page$/ do |name|
+  click_link name
 end
 
 When /^I rename the "([^"]*)" ticket to "([^"]*)"$/ do |name, new_name|
