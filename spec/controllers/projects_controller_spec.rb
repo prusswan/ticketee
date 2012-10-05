@@ -1,8 +1,13 @@
 require 'spec_helper'
 
 describe ProjectsController do
+<<<<<<< HEAD
   let(:user)    { FactoryGirl.create(:user, confirmed_at: Time.now) }
   let(:project) { mock_model(Project, :id => 1) }
+=======
+  let(:user)    { create_user! }
+  let(:project) { FactoryGirl.create(:project) }
+>>>>>>> backup
 
   context "standard users" do
     { "new"     => "get",
