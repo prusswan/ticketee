@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :admin, :as => :admin
   # attr_accessible :title, :body
 
+  has_many :tickets
+  has_many :permissions
+
   def to_s
     "#{email} (#{admin? ? "Admin" : "User"})"
   end
