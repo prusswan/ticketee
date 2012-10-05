@@ -13,9 +13,7 @@ end
 Given /^there are the following users:$/ do |table|
   table.hashes.each do |attributes|
     unconfirmed = attributes.delete("unconfirmed") == "true"
-    admin = attributes.delete("admin") == "true"
-    @user = User.create!(attributes)
-    @user.update_attribute("admin", admin)
+    @user = User.create!(attributes, :as => :admin)
     @user.confirm! unless unconfirmed
   end
 end
@@ -60,9 +58,10 @@ When /^I navigate to the users page$/ do
   click_on 'Users'
 end
 
-When /^I create a user with the email "(.*?)" and the password "(.*?)"$/ do |email, password|
+When /^I create a(?:n (admin)|) user with the email "(.*?)" and the password "(.*?)"$/ do |admin, email, password|
   click_on 'New User'
   fill_in 'Email',    with: email
   fill_in 'Password', with: password
+  check 'Is an admin?' if admin
   click_button 'Create User'
 end
