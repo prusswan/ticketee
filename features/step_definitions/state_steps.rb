@@ -22,3 +22,23 @@ end
 Then /^I should be shown comments containing the state "(.*?)"$/ do |state|
   within('#comments') { page.should have_content state }
 end
+
+When /^I navigate to the states page$/ do
+  click_on 'Admin'
+  click_on 'States'
+end
+
+When /^I create a state called "(.*?)"$/ do |name|
+  click_on 'New State'
+  fill_in 'Name', with: name
+  click_button 'Create State'
+end
+
+When /^I follow "(.*?)" for the "(.*?)" state$/ do |link, name|
+  state = State.find_by_name!(name)
+  within("#state_#{state.id}") { click_on link }
+end
+
+Then /^I should be informed that "(.*?)" is now the default state$/ do |state|
+  page.should have_content "#{state} is now the default state."
+end
