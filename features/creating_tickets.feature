@@ -60,3 +60,16 @@ Feature: Creating Tickets
     And I should be shown the ticket with the attachment "speed.txt"
     # And I should see "spin.txt" within "#ticket .assets"
     And I should be shown the ticket with the attachment "spin.txt"
+
+  Scenario: Creating a ticket with tags
+    # When I fill in "Title" with "Non-standards compliance"
+    # And I fill in "Description" with "My pages are ugly!"
+    # And I fill in "Tags" with "browser visual"
+    # And I press "Create Ticket"
+    And I create a ticket with the title "Non-standards compliance" and the description "My pages are ugly!" and the tags "browser visual"
+    # Then I should see "Ticket has been created."
+    Then I should be informed that the ticket has been created
+    # And I should see "browser" within "#ticket #tags"
+    And I should be shown the ticket with the tag "browser"
+    # And I should see "visual" within "#ticket #tags"
+    And I should be shown the ticket with the tag "visual"

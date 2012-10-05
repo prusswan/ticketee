@@ -1,9 +1,10 @@
 creation_step = /^I\screate\sa\sticket
   (?:\swith\sthe\stitle\s"(.*?)"\sand\sthe\sdescription\s"([^"]*)"
     (?:((?:\sand\sthe\sattachment\s"(?:[^"]*)"\sfor\s"(?:[^"]*)")+)|)
+    (?:(?:\sand\sthe\stag[s|]\s"([^"]*)")|)
   |)$/x
 
-When creation_step do |title, description, file_group|
+When creation_step do |title, description, file_group, tags|
   click_link 'New Ticket' unless first(:xpath, "//a[text()='New Ticket']").nil?
   if title and description
     fill_in 'Title', with: title
@@ -17,6 +18,8 @@ When creation_step do |title, description, file_group|
       click_link 'Add another file'
     end
   end
+
+  fill_in 'Tags', with: tags if tags
 
   click_button 'Create Ticket'
 end
@@ -67,4 +70,8 @@ end
 
 Then /^I should be shown the ticket with the attachment "(.*?)"$/ do |file|
   within('#ticket .assets') { page.should have_content file }
+end
+
+Then /^I should be shown the ticket with the tag "(.*?)"$/ do |tag|
+  within('#ticket #tags') { page.should have_content tag }
 end
