@@ -42,4 +42,12 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]
+
+group :test, :development do
+  gem 'rspec-rails', '~> 2.13.2'
+end
+
+group :test do
+  gem 'capybara', '2.0.2'
+end
