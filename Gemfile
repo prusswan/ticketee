@@ -41,10 +41,13 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-# Use debugger
-gem 'debugger', group: [:development, :test]
+group :development do
+  gem 'guard'
+  gem 'guard-rspec'
+end
 
 group :test, :development do
+  gem 'debugger'
   gem 'rspec-rails', '~> 2.13.2'
 end
 
