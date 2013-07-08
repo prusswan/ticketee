@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  it "displays an error for a missing project" do
-    get :show, :id => "not-here"
-    expect(response).to redirect_to(projects_path)
-    message = "The project you were looking for could not be found."
-    expect(flash[:alert]).to eql(message)
-  end
-
   let(:user) { FactoryGirl.create(:user) }
 
   context "standard users" do
     before do
       sign_in(user)
+    end
+
+    it "displays an error for a missing project" do
+      get :show, :id => "not-here"
+      expect(response).to redirect_to(projects_path)
+      message = "The project you were looking for could not be found."
+      expect(flash[:alert]).to eql(message)
     end
 
     { new: :get,
@@ -26,6 +26,14 @@ describe ProjectsController do
         expect(response).to redirect_to(root_path)
         expect(flash[:alert]).to eql("You must be an admin to do that.")
       end
+    end
+
+    it "cannot access the show action without permission" do
+      project = FactoryGirl.create(:project)
+      get :show, id: project.id
+
+      expect(response).to redirect_to(projects_path)
+      expect(flash[:alert]).to eql("The project you were looking for could not be found.")
     end
   end
 end
