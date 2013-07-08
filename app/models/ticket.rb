@@ -3,4 +3,5 @@ class Ticket < ActiveRecord::Base
   validates :description, length: { minimum: 10 }
 
   belongs_to :project
+  belongs_to :user
 end
