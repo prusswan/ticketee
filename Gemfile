@@ -39,7 +39,7 @@ end
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano', group: :development
+# gem 'capistr1ano', group: :development
 
 group :development do
   gem 'guard'
@@ -53,4 +53,5 @@ end
 
 group :test do
   gem 'capybara', '2.0.2'
+  gem 'factory_girl_rails', '4.2.1'
 end
