@@ -20,6 +20,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -57,4 +58,5 @@ end
 group :test do
   gem 'capybara', '2.0.2'
   gem 'factory_girl_rails', '4.2.1'
+  gem 'database_cleaner', '1.0.1'
 end
