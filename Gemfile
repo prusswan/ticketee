@@ -36,6 +36,8 @@ end
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'cancan', '1.6.9'
 
+gem 'carrierwave', '0.8.0'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
