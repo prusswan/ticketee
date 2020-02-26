@@ -92,7 +92,7 @@ GEM
       activesupport (>= 3.0.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
-    ffi (1.4.0)
+    ffi (1.11.1)
     gherkin (2.11.2)
       json (>= 1.4.6)
     gmail (0.4.0)
